@@ -1,0 +1,50 @@
+{
+  "name": "ERPSee Frappe Development",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "frappe",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [8000, 9000, 6787],
+  "portsAttributes": {
+    "8000-8099": {
+      "label": "Frappe web",
+      "protocol": "http",
+      "onAutoForward": "notify"
+    },
+    "9000-9099": {
+      "label": "Frappe realtime",
+      "onAutoForward": "silent"
+    },
+    "6787": {
+      "label": "Frappe asset watcher",
+      "onAutoForward": "silent"
+    }
+  },
+  "otherPortsAttributes": {
+    "onAutoForward": "ignore"
+  },
+  "remoteUser": "frappe",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "vue.volar",
+        "esbenp.prettier-vscode",
+        "charliermarsh.ruff"
+      ],
+      "settings": {
+        "remote.autoForwardPorts": true,
+        "remote.autoForwardPortsSource": "process",
+        "remote.restoreForwardedPorts": true,
+        "remote.localPortHost": "localhost",
+        "terminal.integrated.profiles.linux": {
+          "frappe bash": {
+            "path": "/bin/bash"
+          }
+        },
+        "terminal.integrated.defaultProfile.linux": "frappe bash",
+        "debug.node.autoAttach": "disabled"
+      }
+    }
+  },
+  "shutdownAction": "stopCompose"
+}
